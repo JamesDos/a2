@@ -57,15 +57,27 @@ public class StudentSet {
         // resize the backing array sooner.  Choose something "small," say, less than 20 (the exact
         // value is up to you).  Don't forget to assert that invariants are satisfied (this is the
         // last time we'll remind you).
-        throw new UnsupportedOperationException();
+        Student[] storeBackArray = new Student[30];
+        assertInv();
     }
 
     /**
      * Return the number of students in this set.
      */
     public int size() {
-        // TODO 10: Implement this method according to its specification
-        throw new UnsupportedOperationException();
+        assertInv();
+
+        // declare and initialize counter called size
+        int size = 0;
+
+        // scan store for all non-null value and mark the start of null
+        while(store[size] != null){
+            size++;
+        }
+        this.size = size;
+
+        assertInv();
+        return size;
     }
 
     /**
