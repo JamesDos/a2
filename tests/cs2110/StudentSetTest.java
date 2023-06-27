@@ -24,14 +24,21 @@ class StudentSetTest {
 
         Student s1 = new Student("f1", "l1");
         Student s2 = new Student("f2", "l2");
+       // int i =0;
+        //while (i<20){
+           // students.add(s1);
+            //i++;
+        //}
 
         assertFalse(students.contains(s1));
         students.add(s1);
+        System.out.println(students.size());
         assertEquals(1, students.size());
         assertTrue(students.contains(s1));
         assertFalse(students.contains(s2));
 
         students.add(s2);
+        System.out.println(students.size());
         assertEquals(2, students.size());
         assertTrue(students.contains(s1));
         assertTrue(students.contains(s2));

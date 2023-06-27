@@ -88,7 +88,24 @@ public class StudentSet {
         // 4. Implement the resizing logic for `add()`.  Confirm that your new test case passes.
         // If you're not sure how to check a precondition, leave yourself a TODO and move on; you
         // might be inspired by a later task.
-        throw new UnsupportedOperationException();
+
+        if(this.size == this.store.length-1){
+            backArray();
+        }
+        this.store[size] = s;
+        this.size++;
+    }
+    /**
+     * Method to generate new local storeTemp array of size*2
+     * copy content of this.store to storeTemp
+     * set this.store to storeTemp
+     */
+    private void backArray(){
+        Student[] storeTemp =  new Student[size*2];
+        for(int i = 0; i <= size;i++){
+            storeTemp[i] = this.store[i];
+        }
+        this.store =  storeTemp;
     }
 
     /**
@@ -96,7 +113,13 @@ public class StudentSet {
      */
     public boolean contains(Student s) {
         // TODO 12: Implement this method according to its specification
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        for(int i = 0; i<size;i++){
+            if (s == store[i]){
+                return true;
+                }
+            }
+        return false;
     }
 
     /**
