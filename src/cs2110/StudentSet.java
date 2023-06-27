@@ -88,12 +88,13 @@ public class StudentSet {
         // 4. Implement the resizing logic for `add()`.  Confirm that your new test case passes.
         // If you're not sure how to check a precondition, leave yourself a TODO and move on; you
         // might be inspired by a later task.
-
+        assert !contains(s);
         if(this.size == this.store.length-1){
-            backArray();
+            this.backArray();
         }
         this.store[size] = s;
         this.size++;
+        this.assertInv();
     }
     /**
      * Method to generate new local storeTemp array of size*2
@@ -101,11 +102,13 @@ public class StudentSet {
      * set this.store to storeTemp
      */
     private void backArray(){
+        this.assertInv();
         Student[] storeTemp =  new Student[size*2];
         for(int i = 0; i <= size;i++){
             storeTemp[i] = this.store[i];
         }
-        this.store =  storeTemp;
+        this.store = storeTemp;
+        this.assertInv();
     }
 
     /**
@@ -130,7 +133,40 @@ public class StudentSet {
         // TODO 13: Implement this method according to its specification
         // You are welcome to decompose this task into operations that can be performed by
         // "helper methods", which you may define below.
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        if (contains(s)){
+            removeStudent(s);
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    /**
+     * Helper method that removes student from store
+     * Requires 'store' to contain student 's'
+     */
+    public void removeStudent(Student s) {
+        assertInv();
+        // storeTemp is of length this.store.length-1 since it is the length of the array
+        // after a student is removed
+        Student[] storeTemp = new Student[this.store.length - 1];
+        // Before for loop reaches student 's', storeTempIndex == i;
+        int storeTempIndex = 0;
+        for(int i = 0; i < this.store.length; i++) {
+            System.out.println(this.store[i]);
+            if (this.store[i] != s || this.store[i] == null){
+                storeTemp[storeTempIndex] = this.store[i];
+                storeTempIndex++;
+            }
+            // When for-loop reaches 's', if-statement will be false which means i will be greater
+            // than storeTempIndex by 1 since  storeTempIndex will not increment while i will
+            // This ensures no index error for storeTemp and all students are on the left
+        }
+        this.store = storeTemp;
+        this.size -= 1;
+        assertInv();
+        //TODO: WRITE MORE TESTCASES!!!
     }
 
     /**
