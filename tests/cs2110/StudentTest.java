@@ -78,5 +78,9 @@ class StudentTest {
         // Back to zero
         s.adjustCredits(-4);
         assertEquals(0, s.credits());
+
+        // Zero adjustment
+        s.adjustCredits(0);
+        assertEquals(0, s.credits());
     }
 }

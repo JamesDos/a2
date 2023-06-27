@@ -43,12 +43,15 @@ class StudentSetTest {
         assertTrue(students.contains(s1));
         assertTrue(students.contains(s2));
 
+        System.out.println(students);
         students.remove(s1);
         assertEquals(1, students.size());
         assertFalse(students.contains(s1));
         assertTrue(students.contains(s2));
 
+        System.out.println(students);
         students.remove(s2);
+        System.out.println(students);
         assertEquals(0, students.size());
         assertFalse(students.contains(s2));
     }
@@ -67,6 +70,8 @@ class StudentSetTest {
         for (int i = 0; i < addedStudents.length; ++i) {
             assertTrue(students.contains(addedStudents[i]));
         }
+
+
     }
 
 }

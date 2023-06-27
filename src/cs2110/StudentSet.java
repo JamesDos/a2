@@ -57,7 +57,7 @@ public class StudentSet {
         // resize the backing array sooner.  Choose something "small," say, less than 20 (the exact
         // value is up to you).  Don't forget to assert that invariants are satisfied (this is the
         // last time we'll remind you).
-        this.store = new Student[15];
+        this.store = new Student[3];
         this.size = 0;
         this.assertInv();
     }
@@ -66,7 +66,6 @@ public class StudentSet {
      * Return the number of students in this set.
      */
     public int size() {
-        this.assertInv();
         return this.size;
     }
     
@@ -89,7 +88,7 @@ public class StudentSet {
         // If you're not sure how to check a precondition, leave yourself a TODO and move on; you
         // might be inspired by a later task.
         assert !contains(s);
-        if(this.size == this.store.length-1){
+        if(this.size == this.store.length){
             this.backArray();
         }
         this.store[size] = s;
@@ -103,8 +102,8 @@ public class StudentSet {
      */
     private void backArray(){
         this.assertInv();
-        Student[] storeTemp =  new Student[size*2];
-        for(int i = 0; i <= size;i++){
+        Student[] storeTemp = new Student[size*2];
+        for(int i = 0; i < size; i++){
             storeTemp[i] = this.store[i];
         }
         this.store = storeTemp;
@@ -134,10 +133,13 @@ public class StudentSet {
         // You are welcome to decompose this task into operations that can be performed by
         // "helper methods", which you may define below.
         //throw new UnsupportedOperationException();
+        assertInv();
         if (contains(s)){
             removeStudent(s);
+            assertInv();
             return true;
         } else{
+            assertInv();
             return false;
         }
     }
@@ -154,19 +156,18 @@ public class StudentSet {
         // Before for loop reaches student 's', storeTempIndex == i;
         int storeTempIndex = 0;
         for(int i = 0; i < this.store.length; i++) {
-            System.out.println(this.store[i]);
             if (this.store[i] != s || this.store[i] == null){
                 storeTemp[storeTempIndex] = this.store[i];
                 storeTempIndex++;
             }
             // When for-loop reaches 's', if-statement will be false which means i will be greater
             // than storeTempIndex by 1 since  storeTempIndex will not increment while i will
-            // This ensures no index error for storeTemp and all students are on the left
+            // This ensures: no index error for storeTemp, students on the left, null on the right
         }
         this.store = storeTemp;
         this.size -= 1;
         assertInv();
-        //TODO: WRITE MORE TESTCASES!!!
+        // TODO: WRITE MORE TESTCASES!!!
     }
 
     /**
