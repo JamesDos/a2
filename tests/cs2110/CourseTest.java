@@ -15,5 +15,16 @@ class CourseTest {
     // public methods.
     // Be sure to verify any effects on objects of other classes as well.
 
+    @Test
+    void testConstructorObserver(){
+        //testing constructor
+        Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 10, 30, 75);
+        //testing observers
+        assertEquals("cs2110", cs2110.title());
+        assertEquals(3, cs2110.credits());
+        assertEquals("phillips", cs2110.location());
+    }
+
+
 
 }

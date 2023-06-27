@@ -50,7 +50,13 @@ public class Course {
      */
     private void assertInv() {
         // TODO 15: Implement this method by asserting the invariants specified above.
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        assert title != null && !title.isEmpty();
+        assert credits >= 0;
+        assert prof != null && !prof.isEmpty();
+        assert location != null && !location.isEmpty();
+        assert startTimeMin >= 0 && startTimeMin <= 1439;
+        assert durationMin >= 0 && startTimeMin + durationMin <= 1440;
     }
 
     /**
@@ -68,7 +74,22 @@ public class Course {
         // Note that the constructor has separate parameters for `startHr` and `startMin`, but the
         // class state only has a field for `startTimeMin`; the constructor should convert between
         // these representations.
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        assert !title.isEmpty();
+        assert !profName.isEmpty();
+        assert !location.isEmpty();
+        assert startHr >= 0 && startHr <= 30;
+        assert startMin >= 0 && startMin <= 59;
+        assert credits >= 0;
+        assert duration >= 0 && duration + startTimeMin <= 1440;
+        this.title = title;
+        this.credits = credits;
+        this.prof = profName;
+        this.location = location;
+        this.durationMin = duration;
+        this.startTimeMin = 60*startHr + startMin;
+        this.students = new StudentSet();
+        assertInv();
     }
 
     /**
