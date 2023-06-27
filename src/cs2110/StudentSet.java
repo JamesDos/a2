@@ -57,29 +57,19 @@ public class StudentSet {
         // resize the backing array sooner.  Choose something "small," say, less than 20 (the exact
         // value is up to you).  Don't forget to assert that invariants are satisfied (this is the
         // last time we'll remind you).
-        Student[] storeBackArray = new Student[30];
-        assertInv();
+        this.store = new Student[15];
+        this.size = 0;
+        this.assertInv();
     }
 
     /**
      * Return the number of students in this set.
      */
     public int size() {
-        assertInv();
-
-        // declare and initialize counter called size
-        int size = 0;
-
-        // scan store for all non-null value and mark the start of null
-        while(store[size] != null){
-            size++;
-        }
-        this.size = size;
-
-        assertInv();
-        return size;
+        this.assertInv();
+        return this.size;
     }
-
+    
     /**
      * Effect: Add student `s` to the set.  Requires `s` is not already in the set.
      */
