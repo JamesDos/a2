@@ -133,6 +133,7 @@ public class Course {
     public String formatStartTime() {
         // TODO 18
         //throw new UnsupportedOperationException();
+        assertInv();
         System.out.println(this.startTimeMin);
         int tempHours = + this.startTimeMin / 60;
         String aMPM = (tempHours < 12)? "AM": "PM";
@@ -173,8 +174,10 @@ public class Course {
      */
     public boolean hasStudent(Student student) {
         // TODO 20
-        // throw new UnsupportedOperationException();
-        return this.students.contains(student);
+        //throw new UnsupportedOperationException();
+        // calls on StudentSet students.contains function which scans the Student[] store
+        // for Student student.
+        return students.contains(student);
     }
 
     /**
@@ -184,12 +187,11 @@ public class Course {
     public boolean enrollStudent(Student student) {
         // TODO 21
         //throw new UnsupportedOperationException();
-        if (!hasStudent(student)){
-            this.students.add(student);
-            student.adjustCredits(this.credits);
+        if (!students.contains(student)){
+            students.add(student);
             assertInv();
             return true;
-        } else{
+        }else{
             return false;
         }
     }
