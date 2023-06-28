@@ -78,7 +78,7 @@ public class Course {
         assert !title.isEmpty();
         assert !profName.isEmpty();
         assert !location.isEmpty();
-        assert startHr >= 0 && startHr <= 30;
+        assert startHr >= 0 && startHr <= 23;
         assert startMin >= 0 && startMin <= 59;
         assert credits >= 0;
         assert duration >= 0 && duration + startTimeMin <= 1440;
@@ -120,7 +120,7 @@ public class Course {
     public String instructor() {
         // TODO 17
         //throw new UnsupportedOperationException();
-        String nameTitle = prof + " Professor";
+        String nameTitle = "Professor " + prof;
         assertInv();
         return nameTitle;
     }
@@ -132,7 +132,21 @@ public class Course {
      */
     public String formatStartTime() {
         // TODO 18
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        assertInv();
+        System.out.println(this.startTimeMin);
+        int tempHours = + this.startTimeMin / 60;
+        String aMPM = (tempHours < 12)? "AM": "PM";
+        if (tempHours > 12){
+            tempHours -= 12;
+        } else if (tempHours == 0){
+            tempHours = 12;
+        }
+        String hours = "" + tempHours;
+        int tempMinutes = this.startTimeMin % 60;
+        String minutes = (tempMinutes < 10)? "0" + tempMinutes: "" + tempMinutes;
+        assertInv();
+        return hours + ":" + minutes + " " + aMPM;
     }
 
     /**
@@ -147,7 +161,12 @@ public class Course {
      */
     public boolean overlaps(Course course) {
         // TODO 19
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        int lo1 = this.startTimeMin;
+        int hi1 = this.startTimeMin + this.durationMin;
+        int lo2 = course.startTimeMin;
+        int hi2 = course.startTimeMin + course.durationMin;
+        return hi1 > lo2 && hi2 > lo1;
     }
 
     /**
