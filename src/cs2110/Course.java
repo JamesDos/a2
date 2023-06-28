@@ -201,7 +201,15 @@ public class Course {
      */
     public boolean dropStudent(Student s) {
         // TODO 22
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        if(!hasStudent(s)){
+            this.students.remove(s);
+            s.adjustCredits(this.credits*(-1));
+            assertInv();
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /**
