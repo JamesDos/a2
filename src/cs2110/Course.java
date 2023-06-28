@@ -119,7 +119,10 @@ public class Course {
      */
     public String instructor() {
         // TODO 17
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        String nameTitle = prof + " Professor";
+        assertInv();
+        return nameTitle;
     }
 
     /**
