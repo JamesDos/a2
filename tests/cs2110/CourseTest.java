@@ -98,22 +98,81 @@ class CourseTest {
     }
 
     @Test
-    void testHasStudent(){
+    void testHasEnrollDropStudent(){
         Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 9, 35, 60);
         Student s1 = new Student("f1", "l1");
         Student s2 = new Student("f2", "l2");
+        //Multiple students enrolled in one course
         // Student is not enrolled (studentSet has no students)
         assertFalse(cs2110.hasStudent(s1));
         assertFalse(cs2110.hasStudent(s2));
+        assertEquals(0, s1.credits());
+        assertEquals(0, s2.credits());
         cs2110.enrollStudent(s1);
         // Student is enrolled
         assertTrue(cs2110.hasStudent(s1));
+        assertEquals(3, s1.credits());
         // Student is not enrolled (studentSet has students)
         assertFalse(cs2110.hasStudent(s2));
+        assertEquals(0, s2.credits());
         cs2110.enrollStudent(s2);
-        // Enrolling accumulates
+        // Enrolling accumulates in studentSet
         assertTrue(cs2110.hasStudent(s1));
         assertTrue(cs2110.hasStudent(s2));
+        assertEquals(3, s1.credits());
+        assertEquals(3, s2.credits());
+        //Dropping One Student
+        cs2110.dropStudent(s1);
+        assertFalse(cs2110.hasStudent(s1));
+        assertTrue(cs2110.hasStudent(s2));
+        assertEquals(0, s1.credits());
+        assertEquals(3, s2.credits());
+        //Dropping accumulates in studentSet
+        cs2110.dropStudent(s2);
+        assertFalse(cs2110.hasStudent(s1));
+        assertFalse(cs2110.hasStudent(s2));
+        assertEquals(0, s1.credits());
+        assertEquals(0, s2.credits());
+
+        // Student is enrolled in multiple courses
+        // These tests are to check the class invariant in Student.java:
+        // nCredits = sum of credits of all Courses they're enrolled in
+        Course cs1110 = new Course("cs1110", 3, "prof", "phillips", 9, 35, 60);
+        cs2110 = new Course("cs2110", 4, "prof", "phillips", 9, 35, 60);
+        Course cs3110 = new Course("cs3110", 5, "prof", "phillips", 9, 35, 60);
+        assertFalse(cs1110.hasStudent(s1));
+        assertFalse(cs2110.hasStudent(s1));
+        assertFalse(cs3110.hasStudent(s1));
+        // Enroll in 1 course
+        cs1110.enrollStudent(s1);
+        assertTrue(cs1110.hasStudent(s1));
+        assertEquals(3, s1.credits());
+        // Enroll in 2 courses
+        cs2110.enrollStudent(s1);
+        assertTrue(cs2110.hasStudent(s1));
+        assertEquals(7, s1.credits());
+        // Enroll in 3 courses
+        cs3110.enrollStudent(s1);
+        assertTrue(cs3110.hasStudent(s1));
+        assertEquals(12, s1.credits());
+        // Drop 1 course
+        cs3110.dropStudent(s1);
+        assertTrue(cs1110.hasStudent(s1));
+        assertTrue(cs2110.hasStudent(s1));
+        assertFalse(cs3110.hasStudent(s1));
+        assertEquals(7, s1.credits());
+        // Drop 2 courses
+        cs2110.dropStudent(s1);
+        assertTrue(cs1110.hasStudent(s1));
+        assertFalse(cs2110.hasStudent(s1));
+        assertFalse(cs3110.hasStudent(s1));
+        assertEquals(3, s1.credits());
+        // Drop 3 courses
+        cs1110.dropStudent(s1);
+        assertFalse(cs1110.hasStudent(s1));
+        assertFalse(cs2110.hasStudent(s1));
+        assertFalse(cs3110.hasStudent(s1));
+        assertEquals(0, s1.credits());
     }
 
 

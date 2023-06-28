@@ -72,7 +72,12 @@ class StudentSetTest {
         }
         assertEquals(10, students.size());
         System.out.println("Searching for "+testStudent.fullName());
+        //System.out.println("Student is " + students.store[3]);
+        //System.out.println(students.store[3] == testStudent);
         // TODO figure out why assert fail.
+        // Strings are the same but the reference is different (test student is a different object
+        // compared to the student you add to "students")
+        // Make "store" public if you want to check
         assertTrue(students.contains(testStudent));
     }
 
