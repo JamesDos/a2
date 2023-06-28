@@ -2,6 +2,7 @@ package cs2110;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 class StudentSetTest {
@@ -54,6 +55,37 @@ class StudentSetTest {
         System.out.println(students);
         assertEquals(0, students.size());
         assertFalse(students.contains(s2));
+    }
+    @Test
+    void additionalRemoveContain(){
+        Student student;
+        StudentSet students = new StudentSet();
+        Student testStudent = new Student(" "," ");
+        for(int i = 0; i < 10;i++){
+            student = new Student(testString(),testString());
+            if (i==3){
+                // stores one student object for testing
+                testStudent = new Student(student.firstName(), student.lastName());
+            }
+            students.add(student);
+            System.out.println(student.fullName());
+        }
+        assertEquals(10, students.size());
+        System.out.println("Searching for "+testStudent.fullName());
+        // TODO figure out why assert fail.
+        assertTrue(students.contains(testStudent));
+    }
+
+    private String testString(){
+        int i;
+        String characters = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder strBuild = new StringBuilder();
+        while (strBuild.length() < 10){
+            i = (int)(Math.random()*26);
+            strBuild.append(characters.charAt(i));
+        }
+        String testString = strBuild.toString();
+        return testString;
     }
 
     @Test
