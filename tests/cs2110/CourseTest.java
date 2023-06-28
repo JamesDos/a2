@@ -97,5 +97,24 @@ class CourseTest {
         assertFalse(cs1110.overlaps(cs2110));
     }
 
+    @Test
+    void testHasStudent(){
+        Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 9, 35, 60);
+        Student s1 = new Student("f1", "l1");
+        Student s2 = new Student("f2", "l2");
+        // Student is not enrolled (studentSet has no students)
+        assertFalse(cs2110.hasStudent(s1));
+        assertFalse(cs2110.hasStudent(s2));
+        cs2110.enrollStudent(s1);
+        // Student is enrolled
+        assertTrue(cs2110.hasStudent(s1));
+        // Student is not enrolled (studentSet has students)
+        assertFalse(cs2110.hasStudent(s2));
+        cs2110.enrollStudent(s2);
+        // Enrolling accumulates
+        assertTrue(cs2110.hasStudent(s1));
+        assertTrue(cs2110.hasStudent(s2));
+    }
+
 
 }

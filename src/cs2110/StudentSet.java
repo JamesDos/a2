@@ -148,7 +148,7 @@ public class StudentSet {
      * Helper method that removes student from store
      * Requires 'store' to contain student 's'
      */
-    public void removeStudent(Student s) {
+    private void removeStudent(Student s) {
         assertInv();
         // storeTemp is of length this.store.length-1 since it is the length of the array
         // after a student is removed
