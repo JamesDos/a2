@@ -196,28 +196,17 @@ public class CMSu {
         // TODO 26: Implement this method according to its specification
         //throw new UnsupportedOperationException();
         int creditSum;
-        // Check for empty students array
-        if(this.students.length == 0 || this.students[0] == null){
-            return true;
-        }
-        for(int i = 0; i <this.students.length;i++){
+        for(int i = 0; i <this.nStudents;i++){
             creditSum = 0;
-
-            if(students[i] == null){
-                return true;
-            }
-
-            for(int j = 0; j < this.nCourses;j++){
-                if(courses[j].hasStudent(students[i])){
-                    System.out.println("Student " + i +students[i].fullName() + " " + " Creditsum "+ creditSum);
+            for(int j = 0; j < this.nCourses;j++) {
+                if (courses[j].hasStudent(students[i])) {
                     creditSum += courses[j].credits();
+                    System.out.println(creditSum);
                 }
-
+            }
             if (students[i].credits() != creditSum){
                 return false;
                 }
-
-            }
         }
         // Check is completed, and no inconsistencies.
         return true;
