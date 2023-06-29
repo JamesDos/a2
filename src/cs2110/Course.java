@@ -134,7 +134,7 @@ public class Course {
         // TODO 18
         //throw new UnsupportedOperationException();
         System.out.println(this.startTimeMin);
-        int tempHours = + this.startTimeMin / 60;
+        int tempHours = this.startTimeMin / 60;
         String aMPM = (tempHours < 12)? "AM": "PM";
         if (tempHours > 12){
             tempHours -= 12;
