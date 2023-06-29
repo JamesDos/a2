@@ -79,6 +79,10 @@ class CMSuTest {
         assertTrue(cms.checkCreditConsistency());
         c1.enrollStudent(s1);
         c2.enrollStudent(s2);
+        // TROUBLESHOOT
+        System.out.println(c1.formatStudents()+ "\t" + c2.formatStudents());
+        System.out.println("s1 credits " + s1.credits() + "\ts2 credits " + s2.credits());
+        System.out.println("c1 credits " + c1.credits() + "\tc2 credits " + c2.credits());
         assertTrue(cms.checkCreditConsistency());
 
         // The following operations violate an invariant that CMSu is supposed to maintain, but this

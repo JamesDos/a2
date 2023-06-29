@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 /*
  * Assignment metadata
- * Name and NetID: TODO (TODO)
+ * Name and NetID: Lam Le ldl56, James Tu jt737
  * Hours spent on assignment: TODO
  */
 
@@ -173,7 +173,16 @@ public class CMSu {
      */
     public StudentSet auditCredits(int creditLimit) {
         // TODO 25: Implement this method according to its specification
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        StudentSet studentsExceedCredit = new StudentSet();
+        for(int i =0; i < this.students.length;i++){
+
+            if(this.students[i] != null && this.students[i].credits() > creditLimit){
+                studentsExceedCredit.add(this.students[i]);
+            }
+        }
+        // TODO: assert studentExceedCredit is not null
+        return studentsExceedCredit;
     }
 
     /**
@@ -185,7 +194,33 @@ public class CMSu {
      */
     public boolean checkCreditConsistency() {
         // TODO 26: Implement this method according to its specification
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        int creditSum;
+        // Check for empty students array
+        if(this.students.length == 0 || this.students[0] == null){
+            return true;
+        }
+        for(int i = 0; i <this.students.length;i++){
+            creditSum = 0;
+
+            if(students[i] == null){
+                return true;
+            }
+
+            for(int j = 0; j < this.nCourses;j++){
+                if(courses[j].hasStudent(students[i])){
+                    System.out.println("Student " + i +students[i].fullName() + " " + " Creditsum "+ creditSum);
+                    creditSum += courses[j].credits();
+                }
+
+            if (students[i].credits() != creditSum){
+                return false;
+                }
+
+            }
+        }
+        // Check is completed, and no inconsistencies.
+        return true;
     }
 
 }
