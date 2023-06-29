@@ -140,7 +140,31 @@ public class CMSu {
      */
     public boolean hasConflict(Student student) {
         // TODO 24: Implement this method according to its specification
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
+        // enrolledCourse is an array of courses that student is enrolled in
+        Course[] enrolledCourse = new Course[courses.length];
+        // size represents number of courses added to enrolledCourse
+        int count = 0;
+        for (int i = 0; i < courses.length; ++i){
+            if (courses[i] != null && courses[i].hasStudent(student)){
+                enrolledCourse[i] = courses[i];
+                ++count;
+            }
+        }
+        // if student is enrolled in less than 2 courses, there can't be an overlap
+        if (count < 2){
+            return false;
+        }
+        // Double for-loop compares every course with one another for overlaps
+        // i < count in for-loop since the rest of the elements in enrolledCourse are null
+        for(int i = 0; i < count; ++i){
+            for(int j = i+1; j < count; ++j){
+                if(enrolledCourse[i].overlaps(enrolledCourse[j])){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

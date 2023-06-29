@@ -147,7 +147,7 @@ class CourseTest {
         cs1110.enrollStudent(s1);
         assertTrue(cs1110.hasStudent(s1));
         assertEquals(3, s1.credits());
-        // Enroll in 2 courses
+        // Enroll in 2 courses (student's credits should accumulate)
         cs2110.enrollStudent(s1);
         assertTrue(cs2110.hasStudent(s1));
         assertEquals(7, s1.credits());
@@ -174,6 +174,4 @@ class CourseTest {
         assertFalse(cs3110.hasStudent(s1));
         assertEquals(0, s1.credits());
     }
-
-
 }

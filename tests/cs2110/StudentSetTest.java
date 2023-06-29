@@ -25,11 +25,6 @@ class StudentSetTest {
 
         Student s1 = new Student("f1", "l1");
         Student s2 = new Student("f2", "l2");
-       // int i =0;
-        //while (i<20){
-           // students.add(s1);
-            //i++;
-        //}
 
         assertFalse(students.contains(s1));
         students.add(s1);
