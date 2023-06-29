@@ -75,9 +75,9 @@ public class Course {
         // class state only has a field for `startTimeMin`; the constructor should convert between
         // these representations.
         //throw new UnsupportedOperationException();
-        assert !title.isEmpty();
-        assert !profName.isEmpty();
-        assert !location.isEmpty();
+        assert title != null && !title.isEmpty();
+        assert profName != null && !profName.isEmpty();
+        assert location != null && !location.isEmpty();
         assert startHr >= 0 && startHr <= 23;
         assert startMin >= 0 && startMin <= 59;
         assert credits >= 0;
