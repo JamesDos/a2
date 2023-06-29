@@ -40,6 +40,7 @@ class CMSuTest {
         Course c1 = new Course("OOP", 3, "Gries", "STL185", 10, 10, 50);
         Course c2 = new Course("CS 2800", 3, "Silva", "Gates G01", 1, 30, 50);
         Course c3 = new Course("Python", 4, "White", "Bailey", 10, 15, 50);
+
         cms.addCourse(c1);
         cms.addCourse(c2);
         cms.addCourse(c3);
@@ -63,6 +64,45 @@ class CMSuTest {
         // No more conflict
         c3.dropStudent(s1);
         assertFalse(cms.hasConflict(s1));
+
+        // Additional Test Cases
+        // Reset from last test case:
+        c2.dropStudent(s1);
+        c1.dropStudent(s1);
+
+        Course c4 = new Course("c4", 3, "Gries", "STL185", 11, 0, 60);
+        Course c5 = new Course("c5", 3, "Silva", "Gates G01", 12, 0, 60);
+        Course c6 = new Course("c6", 4, "White", "Bailey", 9, 0, 360);
+        cms.addCourse(c4);
+        cms.addCourse(c5);
+        cms.addCourse(c6);
+
+        // Non Overlapping Classes (0-minute difference)
+        // Tests courses added to CMSu for which s1 is not enrolled in
+
+        c1.enrollStudent(s1);
+        c4.enrollStudent(s1);
+        c5.enrollStudent(s1);
+        assertFalse(cms.hasConflict(s1));
+
+        // Conflict across multiple courses (one course conflicts with all others)
+        c6.enrollStudent(s1);
+        assertTrue(cms.hasConflict(s1));
+
+        // Multiple conflicts
+        c2.enrollStudent(s1);
+        c3.enrollStudent(s1);
+        assertTrue(cms.hasConflict(s1));
+
+        // Still has conflict
+        c6.dropStudent(s1);
+        c2.dropStudent(s1);
+        assertTrue(cms.hasConflict(s1));
+
+        //No more conflict
+        c3.dropStudent(s1);
+        assertFalse(cms.hasConflict(s1));
+
     }
 
     @Test
@@ -80,9 +120,9 @@ class CMSuTest {
         c1.enrollStudent(s1);
         c2.enrollStudent(s2);
         // TROUBLESHOOT
-        System.out.println(c1.formatStudents()+ "\t" + c2.formatStudents());
-        System.out.println("s1 credits " + s1.credits() + "\ts2 credits " + s2.credits());
-        System.out.println("c1 credits " + c1.credits() + "\tc2 credits " + c2.credits());
+        // System.out.println(c1.formatStudents()+ "\t" + c2.formatStudents());
+        // System.out.println("s1 credits " + s1.credits() + "\ts2 credits " + s2.credits());
+        // System.out.println("c1 credits " + c1.credits() + "\tc2 credits " + c2.credits());
         assertTrue(cms.checkCreditConsistency());
 
         // The following operations violate an invariant that CMSu is supposed to maintain, but this

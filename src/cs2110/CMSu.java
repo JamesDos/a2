@@ -1,6 +1,7 @@
 package cs2110;
 
 import java.io.PrintStream;
+import java.util.Objects;
 
 /*
  * Assignment metadata
@@ -142,12 +143,12 @@ public class CMSu {
         // TODO 24: Implement this method according to its specification
         // throw new UnsupportedOperationException();
         // enrolledCourse is an array of courses that student is enrolled in
-        Course[] enrolledCourse = new Course[courses.length];
-        // size represents number of courses added to enrolledCourse
+        Course[] enrolledCourse = new Course[nCourses];
+        // count represents number of courses added to enrolledCourse
         int count = 0;
-        for (int i = 0; i < courses.length; ++i){
+        for (int i = 0; i < nCourses; ++i){
             if (courses[i] != null && courses[i].hasStudent(student)){
-                enrolledCourse[i] = courses[i];
+                enrolledCourse[count] = courses[i];
                 ++count;
             }
         }
@@ -157,7 +158,7 @@ public class CMSu {
         }
         // Double for-loop compares every course with one another for overlaps
         // i < count in for-loop since the rest of the elements in enrolledCourse are null
-        for(int i = 0; i < count; ++i){
+        for(int i = 0; i < count-1; ++i){
             for(int j = i+1; j < count; ++j){
                 if(enrolledCourse[i].overlaps(enrolledCourse[j])){
                     return true;
@@ -201,12 +202,12 @@ public class CMSu {
             for(int j = 0; j < this.nCourses;j++) {
                 if (courses[j].hasStudent(students[i])) {
                     creditSum += courses[j].credits();
-                    System.out.println(creditSum);
+                    //System.out.println(creditSum);
                 }
             }
             if (students[i].credits() != creditSum){
                 return false;
-                }
+            }
         }
         // Check is completed, and no inconsistencies.
         return true;
