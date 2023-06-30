@@ -176,9 +176,9 @@ public class CMSu {
         // TODO 25: Implement this method according to its specification
         //throw new UnsupportedOperationException();
         StudentSet studentsExceedCredit = new StudentSet();
-        for(int i =0; i < this.students.length;i++){
-
-            if(this.students[i] != null && this.students[i].credits() > creditLimit){
+        // nStudents represents indices of "students" array that have students and thus are !null
+        for(int i = 0; i < this.nStudents; i++){
+            if(this.students[i].credits() > creditLimit){
                 studentsExceedCredit.add(this.students[i]);
             }
         }
