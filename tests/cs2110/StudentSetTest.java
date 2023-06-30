@@ -6,6 +6,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 class StudentSetTest {
+
     @Test
     void testConstructorAndSize() {
         // Constructor should yield an empty set
@@ -51,14 +52,15 @@ class StudentSetTest {
         assertEquals(0, students.size());
         assertFalse(students.contains(s2));
     }
+
     @Test
-    void additionalRemoveContain(){
+    void additionalRemoveContain() {
         Student student;
         StudentSet students = new StudentSet();
-        Student testStudent = new Student(" "," ");
-        for(int i = 0; i < 10;i++){
-            student = new Student(testString(),testString());
-            if (i==3){
+        Student testStudent = new Student(" ", " ");
+        for (int i = 0; i < 10; i++) {
+            student = new Student(testString(), testString());
+            if (i == 3) {
                 // stores one student object for testing
                 testStudent = new Student(student.firstName(), student.lastName());
             }
@@ -66,7 +68,7 @@ class StudentSetTest {
             System.out.println(student.fullName());
         }
         assertEquals(10, students.size());
-        System.out.println("Searching for "+testStudent.fullName());
+        System.out.println("Searching for " + testStudent.fullName());
         //System.out.println("Student is " + students.store[3]);
         //System.out.println(students.store[3] == testStudent);
         // TODO figure out why assert fail.
@@ -76,12 +78,12 @@ class StudentSetTest {
         assertTrue(students.contains(testStudent));
     }
 
-    private String testString(){
+    private String testString() {
         int i;
         String characters = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder strBuild = new StringBuilder();
-        while (strBuild.length() < 10){
-            i = (int)(Math.random()*26);
+        while (strBuild.length() < 10) {
+            i = (int) (Math.random() * 26);
             strBuild.append(characters.charAt(i));
         }
         String testString = strBuild.toString();
@@ -98,11 +100,16 @@ class StudentSetTest {
             students.add(addedStudents[i]);
             assertEquals(i + 1, students.size());
         }
-
         for (int i = 0; i < addedStudents.length; ++i) {
             assertTrue(students.contains(addedStudents[i]));
         }
-
+        // Additional Test Cases
+        // Testing Remove/Contains After Resize
+        for (int i = 0; i < nAdds; ++i) {
+            students.remove(addedStudents[i]);
+            assertEquals(nAdds - 1 - i, students.size());
+            assertFalse(students.contains(addedStudents[i]));
+        }
 
     }
 

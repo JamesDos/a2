@@ -6,7 +6,7 @@ import java.util.Objects;
 /*
  * Assignment metadata
  * Name and NetID: Lam Le ldl56, James Tu jt737
- * Hours spent on assignment: TODO
+ * Hours spent on assignment: 12
  */
 
 /**
@@ -146,21 +146,21 @@ public class CMSu {
         Course[] enrolledCourse = new Course[nCourses];
         // count represents number of courses added to enrolledCourse
         int count = 0;
-        for (int i = 0; i < nCourses; ++i){
-            if (courses[i] != null && courses[i].hasStudent(student)){
+        for (int i = 0; i < nCourses; ++i) {
+            if (courses[i] != null && courses[i].hasStudent(student)) {
                 enrolledCourse[count] = courses[i];
                 ++count;
             }
         }
         // if student is enrolled in less than 2 courses, there can't be an overlap
-        if (count < 2){
+        if (count < 2) {
             return false;
         }
         // Double for-loop compares every course with one another for overlaps
         // i < count in for-loop since the rest of the elements in enrolledCourse are null
-        for(int i = 0; i < count-1; ++i){
-            for(int j = i+1; j < count; ++j){
-                if(enrolledCourse[i].overlaps(enrolledCourse[j])){
+        for (int i = 0; i < count - 1; ++i) {
+            for (int j = i + 1; j < count; ++j) {
+                if (enrolledCourse[i].overlaps(enrolledCourse[j])) {
                     return true;
                 }
             }
@@ -177,8 +177,8 @@ public class CMSu {
         //throw new UnsupportedOperationException();
         StudentSet studentsExceedCredit = new StudentSet();
         // nStudents represents indices of "students" array that have students and thus are !null
-        for(int i = 0; i < this.nStudents; i++){
-            if(this.students[i].credits() > creditLimit){
+        for (int i = 0; i < this.nStudents; i++) {
+            if (this.students[i].credits() > creditLimit) {
                 studentsExceedCredit.add(this.students[i]);
             }
         }
@@ -189,23 +189,22 @@ public class CMSu {
     /**
      * Return whether the number of credits that each student tracked by this CMS thinks they are
      * enrolled in matches the total of the credits offered by each course managed by this CMS that
-     * considers the student to be enrolled.  This serves as a consistency check for the CMS's
-     * data.  Relaxed precondition: the invariant regarding credit consistency between courses and
-     * students may be violated (in which case this returns false).
+     * considers the student to be enrolled.  This serves as a consistency check for the CMS's data.
+     * Relaxed precondition: the invariant regarding credit consistency between courses and students
+     * may be violated (in which case this returns false).
      */
     public boolean checkCreditConsistency() {
         // TODO 26: Implement this method according to its specification
         //throw new UnsupportedOperationException();
         int creditSum;
-        for(int i = 0; i <this.nStudents;i++){
+        for (int i = 0; i < this.nStudents; i++) {
             creditSum = 0;
-            for(int j = 0; j < this.nCourses;j++) {
+            for (int j = 0; j < this.nCourses; j++) {
                 if (courses[j].hasStudent(students[i])) {
                     creditSum += courses[j].credits();
-                    //System.out.println(creditSum);
                 }
             }
-            if (students[i].credits() != creditSum){
+            if (students[i].credits() != creditSum) {
                 return false;
             }
         }

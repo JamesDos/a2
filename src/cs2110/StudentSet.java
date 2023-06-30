@@ -68,7 +68,7 @@ public class StudentSet {
     public int size() {
         return this.size;
     }
-    
+
     /**
      * Effect: Add student `s` to the set.  Requires `s` is not already in the set.
      */
@@ -88,22 +88,23 @@ public class StudentSet {
         // If you're not sure how to check a precondition, leave yourself a TODO and move on; you
         // might be inspired by a later task.
         assert !contains(s);
-        if(this.size == this.store.length){
+        if (this.size == this.store.length) {
             this.backArray();
         }
         this.store[size] = s;
         this.size++;
         this.assertInv();
     }
+
     /**
-     * Method to generate new local storeTemp array of size*2
-     * copy content of this.store to storeTemp
-     * set this.store to storeTemp
+     * Helper method used by add() to generate new local storeTemp array of size*2 Only called when
+     * adding a student to a full student array Copies content of current student array to storeTemp
+     * Sets storeTemp to current student array
      */
-    private void backArray(){
+    private void backArray() {
         this.assertInv();
-        Student[] storeTemp = new Student[size*2];
-        for(int i = 0; i < size; i++){
+        Student[] storeTemp = new Student[size * 2];
+        for (int i = 0; i < size; i++) {
             storeTemp[i] = this.store[i];
         }
         this.store = storeTemp;
@@ -116,11 +117,11 @@ public class StudentSet {
     public boolean contains(Student s) {
         // TODO 12: Implement this method according to its specification
         //throw new UnsupportedOperationException();
-        for(int i = 0; i<size;i++){
-            if (s == store[i]){
+        for (int i = 0; i < size; i++) {
+            if (s == store[i]) {
                 return true;
-                }
             }
+        }
         return false;
     }
 
@@ -134,40 +135,39 @@ public class StudentSet {
         // "helper methods", which you may define below.
         //throw new UnsupportedOperationException();
         assertInv();
-        if (contains(s)){
+        if (contains(s)) {
             removeStudent(s);
             assertInv();
             return true;
-        } else{
+        } else {
             assertInv();
             return false;
         }
     }
 
     /**
-     * Helper method that removes student from store
-     * Requires 'store' to contain student 's'
+     * Helper method used by remove() that removes student from store Requires 'store' to contain
+     * student 's'
      */
     private void removeStudent(Student s) {
         assertInv();
         // storeTemp is of length this.store.length-1 since it is the length of the array
         // after a student is removed
         Student[] storeTemp = new Student[this.store.length - 1];
-        // Before for loop reaches student 's', storeTempIndex == i;
+        // Before for-loop reaches student 's', storeTempIndex == i;
         int storeTempIndex = 0;
-        for(int i = 0; i < this.store.length; i++) {
-            if (this.store[i] != s || this.store[i] == null){
+        // When for-loop reaches 's', if-statement will be false which means i will be greater
+        // than storeTempIndex by 1; storeTempIndex will not increment while i will
+        // This ensures: no index error for storeTemp, students on the left, null on the right
+        for (int i = 0; i < this.store.length; i++) {
+            if (this.store[i] != s || this.store[i] == null) {
                 storeTemp[storeTempIndex] = this.store[i];
                 storeTempIndex++;
             }
-            // When for-loop reaches 's', if-statement will be false which means i will be greater
-            // than storeTempIndex by 1 since  storeTempIndex will not increment while i will
-            // This ensures: no index error for storeTemp, students on the left, null on the right
         }
         this.store = storeTemp;
         this.size -= 1;
         assertInv();
-        // TODO: WRITE MORE TESTCASES!!!
     }
 
     /**

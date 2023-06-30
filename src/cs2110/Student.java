@@ -1,5 +1,5 @@
 package cs2110;
-// Lam Le Testing
+
 /**
  * A student tracked by the CMSμ course management system.
  */
@@ -19,14 +19,21 @@ public class Student {
     // Reminder: You should delete this comment block after completing the TODO.  You are welcome to
     // borrow text from it when writing your field specifications, however.
 
-    /** studentFirstName: string representing student's first name; cannot be empty or null */
+    /**
+     * studentFirstName: string representing student's first name; cannot be empty or null
+     */
     private final String studentFirstName;
-    /** studentLastName: string representing student's last name; cannot be empty or null */
+    /**
+     * studentLastName: string representing student's last name; cannot be empty or null
+     */
     private final String studentLastName;
-    /** nCredits: int representing the number of credits student is currently enrolled in;
-     * nCredits >= 0; nCredits must be equal to the sum of the credits of all Courses this student
-     * is enrolled in */
+    /**
+     * nCredits: int representing the number of credits student is currently enrolled in; nCredits
+     * >= 0; nCredits must be equal to the sum of the credits of all Courses this student is
+     * enrolled in
+     */
     private int nCredits;
+
     /**
      * Assert that this object satisfies its class invariants.
      */
@@ -38,7 +45,6 @@ public class Student {
         //throw new UnsupportedOperationException();
         assert (this.studentFirstName != null) && !this.studentFirstName.equals("");
         assert (this.studentLastName != null) && !this.studentLastName.equals("");
-        //Todo: finish nCredits invariant (sum of course credits)
         assert this.nCredits >= 0;
     }
 
@@ -56,8 +62,8 @@ public class Student {
         // initialize it when it is declared (or even to rely on a default value), but prefer to
         // assign it in the constructor so that the whole state is initialized in one place.
         //throw new UnsupportedOperationException();
-        assert !firstName.equals("");
-        assert !lastName.equals("");
+        assert !firstName.isEmpty();
+        assert !lastName.isEmpty();
         this.studentFirstName = firstName;
         this.studentLastName = lastName;
         this.nCredits = 0;
@@ -115,7 +121,7 @@ public class Student {
         // Assert that all preconditions are met.
         // Assert that the class invariant is satisfied before returning.
         //throw new UnsupportedOperationException();
-        this.assertInv();
+        assert nCredits + deltaCredits >= 0;
         this.nCredits += deltaCredits;
         this.assertInv();
     }

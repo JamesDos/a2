@@ -16,7 +16,7 @@ class CourseTest {
     // Be sure to verify any effects on objects of other classes as well.
 
     @Test
-    void testConstructorObserver(){
+    void testConstructorObserver() {
         //testing constructor
         Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 10, 30, 75);
         //testing observers
@@ -26,7 +26,7 @@ class CourseTest {
     }
 
     @Test
-    void testInstructor(){
+    void testInstructor() {
         //Basic test case
         Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 10, 30, 75);
         assertEquals("Professor prof", cs2110.instructor());
@@ -36,7 +36,7 @@ class CourseTest {
     }
 
     @Test
-    void formatStartTime(){
+    void formatStartTime() {
         //Basic test case AM; Double-Digit Hours
         Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 11, 35, 75);
         assertEquals("11:35 AM", cs2110.formatStartTime());
@@ -55,6 +55,9 @@ class CourseTest {
         //Zero in Hours
         cs2110 = new Course("cs2110", 3, "prof", "phillips", 10, 9, 75);
         assertEquals("10:09 AM", cs2110.formatStartTime());
+        //Single Digit Hours AM
+        cs2110 = new Course("cs2110", 3, "prof", "phillips", 1, 0, 75);
+        assertEquals("1:00 AM", cs2110.formatStartTime());
         //12:00 AM
         cs2110 = new Course("cs2110", 3, "prof", "phillips", 0, 0, 75);
         assertEquals("12:00 AM", cs2110.formatStartTime());
@@ -64,7 +67,7 @@ class CourseTest {
     }
 
     @Test
-    void testOverlaps(){
+    void testOverlaps() {
         //No Overlap (difference in times > 0)
         Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 9, 35, 60);
         Course cs1110 = new Course("cs1110", 3, "prof", "phillips", 11, 35, 60);
@@ -98,7 +101,7 @@ class CourseTest {
     }
 
     @Test
-    void testHasEnrollDropStudent(){
+    void testHasEnrollDropStudent() {
         Course cs2110 = new Course("cs2110", 3, "prof", "phillips", 9, 35, 60);
         Student s1 = new Student("f1", "l1");
         Student s2 = new Student("f2", "l2");

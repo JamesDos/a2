@@ -174,16 +174,17 @@ class CMSuTest {
         assertTrue(cms.checkCreditConsistency());
         c1.enrollStudent(s1);
         c2.enrollStudent(s2);
-        // TROUBLESHOOT
-        // System.out.println(c1.formatStudents()+ "\t" + c2.formatStudents());
-        // System.out.println("s1 credits " + s1.credits() + "\ts2 credits " + s2.credits());
-        // System.out.println("c1 credits " + c1.credits() + "\tc2 credits " + c2.credits());
         assertTrue(cms.checkCreditConsistency());
 
         // Tests whether credits are consistent when students course credits accumulate
         // and when multiple students enrolled in the same course
         c2.enrollStudent(s1);
         c1.enrollStudent(s2);
+        assertTrue(cms.checkCreditConsistency());
+
+        // Course that no students are enrolled in
+        Course c3 = new Course("c3", 4, "Clarkson", "Uris G01", 13, 30, 50);
+        cms.addCourse(c3);
         assertTrue(cms.checkCreditConsistency());
 
         // Tests whether credits are consistent when students drop courses

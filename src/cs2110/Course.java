@@ -87,7 +87,7 @@ public class Course {
         this.prof = profName;
         this.location = location;
         this.durationMin = duration;
-        this.startTimeMin = 60*startHr + startMin;
+        this.startTimeMin = 60 * startHr + startMin;
         this.students = new StudentSet();
         assertInv();
     }
@@ -133,17 +133,16 @@ public class Course {
     public String formatStartTime() {
         // TODO 18
         //throw new UnsupportedOperationException();
-
         int tempHours = this.startTimeMin / 60;
-        String aMPM = (tempHours < 12)? "AM": "PM";
-        if (tempHours > 12){
+        String aMPM = (tempHours < 12) ? "AM" : "PM";
+        if (tempHours > 12) {
             tempHours -= 12;
-        } else if (tempHours == 0){
+        } else if (tempHours == 0) {
             tempHours = 12;
         }
         String hours = "" + tempHours;
         int tempMinutes = this.startTimeMin % 60;
-        String minutes = (tempMinutes < 10)? "0" + tempMinutes: "" + tempMinutes;
+        String minutes = (tempMinutes < 10) ? "0" + tempMinutes : "" + tempMinutes;
         assertInv();
         return hours + ":" + minutes + " " + aMPM;
     }
@@ -184,12 +183,12 @@ public class Course {
     public boolean enrollStudent(Student student) {
         // TODO 21
         //throw new UnsupportedOperationException();
-        if (!hasStudent(student)){
+        if (!hasStudent(student)) {
             this.students.add(student);
             student.adjustCredits(this.credits);
             assertInv();
             return true;
-        } else{
+        } else {
             return false;
         }
     }
@@ -202,12 +201,12 @@ public class Course {
     public boolean dropStudent(Student s) {
         // TODO 22
         //throw new UnsupportedOperationException();
-        if(hasStudent(s)){
+        if (hasStudent(s)) {
             this.students.remove(s);
-            s.adjustCredits(this.credits*(-1));
+            s.adjustCredits(this.credits * (-1));
             assertInv();
             return true;
-        }else {
+        } else {
             return false;
         }
     }
